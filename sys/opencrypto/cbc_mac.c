@@ -40,16 +40,19 @@ static void
 xor_and_encrypt(struct aes_cbc_mac_ctx *ctx,
 		const uint8_t *src, uint8_t *dst)
 {
-#define	NWORDS	(CCM_CBC_BLOCK_LEN / sizeof(uint64_t))
-	uint64_t b1[NWORDS], b2[NWORDS], temp[NWORDS];
+	const uint64_t *b1;
+	uint64_t *b2;
+	uint64_t temp_block[CCM_CBC_BLOCK_LEN/sizeof(uint64_t)];
 
-	memcpy(b1, src, CCM_CBC_BLOCK_LEN);
-	memcpy(b2, dst, CCM_CBC_BLOCK_LEN);
+	b1 = (const uint64_t*)src;
+	b2 = (uint64_t*)dst;
 
-	for (size_t count = 0; count < NWORDS; count++)
-		temp[count] = b1[count] ^ b2[count];
-	rijndaelEncrypt(ctx->keysched, ctx->rounds, (void *)temp, dst);
-#undef NWORDS
+	for (size_t count = 0;
+	     count < CCM_CBC_BLOCK_LEN/sizeof(uint64_t);
+	     count++) {
+		temp_block[count] = b1[count] ^ b2[count];
+	}
+	rijndaelEncrypt(ctx->keysched, ctx->rounds, (void*)temp_block, dst);
 }
 
 void

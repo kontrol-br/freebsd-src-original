@@ -1,5 +1,5 @@
 /*-
- * SPDX-License-Identifier: BSD-2-Clause
+ * SPDX-License-Identifier: BSD-2-Clause-FreeBSD
  *
  * Copyright (c) 2020 Netflix Inc.
  *
