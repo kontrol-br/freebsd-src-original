@@ -2,8 +2,7 @@
 
 .include <bsd.init.mk>
 
-MAN=	loader.conf.lua.5 \
-	cli.lua.8 \
+MAN=	cli.lua.8 \
 	color.lua.8 \
 	config.lua.8 \
 	core.lua.8 \
@@ -29,5 +28,9 @@ FILES=	cli.lua \
 	menu.lua \
 	password.lua \
 	screen.lua
+
+# pfSense
+FILES+=	logo-Kontrolbw.lua \
+	brand-Kontrol.lua
 
 .include <bsd.prog.mk>
