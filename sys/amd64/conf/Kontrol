@@ -1,0 +1,4 @@
+include Kontrol-DEBUG
+include "../../conf/std.nodebug"
+
+ident   Kontrol
